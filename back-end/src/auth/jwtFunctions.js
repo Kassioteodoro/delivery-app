@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+
 const secret = 'secret_key';
 
 const jwtConfig = {
