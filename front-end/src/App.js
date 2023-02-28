@@ -1,21 +1,25 @@
 import React from 'react';
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
-import Login from './pages/login';
-import Orders from './pages/orders';
-import Register from './pages/register';
+import Login from './pages/Login';
+import Orders from './pages/Orders';
+import Register from './pages/Register';
 
 function App() {
   document.title = 'App delivery';
   document.onload = localStorage.setItem('b', 'b');
   return (
-    <Routes>
-      <Route exact path="/" element={ <Navigate to="/login" /> } />
-      <Route exact path="/login" element={ <Login /> } />
-      <Route exact path="/register" element={ <Register /> } />
-      <Route exact path="/orders" element={ <Orders /> } />
-    </Routes>
+    <Switch>
+      <Route exact path="/">
+        {' '}
+        <Redirect to="/login" />
+        {' '}
+      </Route>
+      <Route exact path="/login" component={ Login } />
+      <Route exact path="/register" component={ Register } />
+      <Route exact path="/orders" component={ Orders } />
+    </Switch>
+
   );
 }
-
 export default App;
