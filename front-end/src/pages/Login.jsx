@@ -8,7 +8,7 @@ function Login() {
 
   useEffect(() => {
     const validEmail = email.toLowerCase().match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
-    const validPassword = password.length > MAGIC_SIX;
+    const validPassword = password.length >= MAGIC_SIX;
     if (validEmail && validPassword) {
       setLoginButton(false);
     } else {
