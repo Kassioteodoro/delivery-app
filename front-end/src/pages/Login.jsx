@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 function Login() {
+  const history = useHistory();
   const [email, setChangeEmail] = useState('');
   const [password, setChangePass] = useState('');
   const [loginButton, setLoginButton] = useState(true);
@@ -24,9 +26,14 @@ function Login() {
       password,
     }).then((response) => {
       localStorage.setItem('token', response.data.token);
+      history.push('/orders');
     }).catch(() => {
       setInvalidUser(true);
     });
+  };
+
+  const redirectRegister = () => {
+    history.push('/register');
   };
 
   return (
@@ -73,13 +80,14 @@ function Login() {
             className="register-button"
             type="button"
             data-testid="common_login__button-register"
+            onClick={ redirectRegister }
           >
             Botão de Registro
           </button>
         </form>
         { invalidUser && (
           <h2 data-testid="common_login__element-invalid-email" className="error">
-            Usuário não encontrado!
+            Login inválido
           </h2>
         )}
       </div>

@@ -7,7 +7,6 @@ import Register from './pages/Register';
 
 function App() {
   document.title = 'App delivery';
-  document.onload = localStorage.setItem('b', 'b');
   return (
     <Switch>
       <Route exact path="/">
