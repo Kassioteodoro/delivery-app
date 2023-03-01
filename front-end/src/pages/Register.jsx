@@ -8,7 +8,7 @@ function Register() {
   const [password, setChangePass] = useState('');
   const [loginButton, setLoginButton] = useState(true);
   const [name, setName] = useState('');
-  // const [invalidUser, setInvalidUser] = useState(false);
+  const [invalidUser, setInvalidUser] = useState(false);
   const MAGIC_SIX = 6;
   const MAGIC_ELEVEN = 11;
 
@@ -23,13 +23,15 @@ function Register() {
     }
   }, [email, password, name]);
 
-  const postNewUser = async () => {
-    await axios.post('http://localhost:3001/login', {
+  const postNewUser = async (event) => {
+    event.preventDefault();
+    await axios.post('http://localhost:3001/register', {
+      name,
       email,
       password,
     }).then((response) => {
       localStorage.setItem('token', response.data.token);
-      history.push('/orders');
+      history.push('/customer/products');
     }).catch(() => {
       setInvalidUser(true);
     });
@@ -75,23 +77,25 @@ function Register() {
               onChange={ (e) => setChangePass(e.target.value) }
             />
           </p>
-          <input
+          <button
             data-testid="common_register__button-register"
             className="login-button"
-            type="submit"
-            value="CADASTRAR"
+            type="button"
             disabled={ loginButton }
-            onClick={ postNewUser }
-          />
+            onClick={ (e) => postNewUser(e) }
+          >
+            CADASTRAR
+          </button>
           <br />
         </form>
-        <h2
-          data-testid="common_register__element-invalid_register"
-          className="invalid-register"
-        >
-          {}
-          {' '}
-        </h2>
+        { invalidUser && (
+          <h2
+            data-testid="common_register__element-invalid_register"
+            className="invalid-register"
+          >
+            Usuário já existente
+          </h2>
+        )}
       </div>
     </div>
   );
