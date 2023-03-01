@@ -7,7 +7,6 @@ import Register from './pages/Register';
 
 function App() {
   document.title = 'App delivery';
-  document.onload = localStorage.setItem('b', 'b');
   return (
     <Switch>
       <Route exact path="/">
@@ -17,7 +16,7 @@ function App() {
       </Route>
       <Route exact path="/login" component={ Login } />
       <Route exact path="/register" component={ Register } />
-      <Route exact path="/orders" component={ Orders } />
+      <Route exact path="/customer/products" component={ Orders } />
     </Switch>
 
   );
