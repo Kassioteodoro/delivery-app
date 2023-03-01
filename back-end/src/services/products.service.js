@@ -6,6 +6,9 @@ const findAllProducts = async () => {
   return { message: products };
 };
 
+const findProductByName = async (name) => Product.findOne({ where: { name }, raw: true });
+
 module.exports = {
   findAllProducts,
+  findProductByName,
 };
