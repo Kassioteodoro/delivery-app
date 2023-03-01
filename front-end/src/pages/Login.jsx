@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function Login() {
   const [email, setChangeEmail] = useState('');
   const [password, setChangePass] = useState('');
   const [loginButton, setLoginButton] = useState(true);
+  const [invalidUser, setInvalidUser] = useState(false);
   const MAGIC_SIX = 6;
 
   useEffect(() => {
@@ -15,6 +17,17 @@ function Login() {
       setLoginButton(true);
     }
   }, [email, password]);
+
+  const postUser = async () => {
+    await axios.post('http://localhost:3001/login', {
+      email,
+      password,
+    }).then((response) => {
+      localStorage.setItem('token', response.data.token);
+    }).catch(() => {
+      setInvalidUser(true);
+    });
+  };
 
   return (
     <div className="login-container">
@@ -51,6 +64,7 @@ function Login() {
             className="login-button"
             type="button"
             disabled={ loginButton }
+            onClick={ postUser }
           >
             LOGIN
           </button>
@@ -63,10 +77,11 @@ function Login() {
             Botão de Registro
           </button>
         </form>
-        <h2 data-testid="common_login__element-invalid-email" className="error">
-          {}
-          {' '}
-        </h2>
+        { invalidUser && (
+          <h2 data-testid="common_login__element-invalid-email" className="error">
+            Usuário não encontrado!
+          </h2>
+        )}
       </div>
     </div>
   );
