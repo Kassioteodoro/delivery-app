@@ -27,7 +27,7 @@ function Login() {
       password,
     }).then((response) => {
       localStorage.setItem('token', response.data.token);
-      history.push('/orders');
+      history.push('/customer/products');
     }).catch(() => {
       setInvalidUser(true);
     });
