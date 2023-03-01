@@ -18,7 +18,10 @@ const findAllUser = async () => {
   return { message: users };
 };
 
+const findUserByName = async (name) => User.findOne({ where: { name }, raw: true });
+
 module.exports = {
   findAllUser,
   createUser,
+  findUserByName,
 };
