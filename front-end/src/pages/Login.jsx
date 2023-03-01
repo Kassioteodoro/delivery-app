@@ -20,7 +20,8 @@ function Login() {
     }
   }, [email, password]);
 
-  const postUser = async () => {
+  const postUser = async (event) => {
+    event.preventDefault();
     await axios.post('http://localhost:3001/login', {
       email,
       password,
@@ -71,7 +72,7 @@ function Login() {
             className="login-button"
             type="button"
             disabled={ loginButton }
-            onClick={ postUser }
+            onClick={ (e) => postUser(e) }
           >
             LOGIN
           </button>
@@ -82,7 +83,7 @@ function Login() {
             data-testid="common_login__button-register"
             onClick={ redirectRegister }
           >
-            Botão de Registro
+            Ainda não tenho conta
           </button>
         </form>
         { invalidUser && (
