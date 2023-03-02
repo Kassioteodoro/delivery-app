@@ -1,37 +1,52 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import ProductQuantity from './ProductQuantity';
 
 function OrderCard() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const getProducts = async () => {
+      await axios.get('http://localhost:3001/products')
+        .then((response) => {
+          setProducts(response.data);
+          console.log(response.data);
+        });
+    };
+    getProducts();
+  }, []);
+
   return (
-    <div className="order-card">
-      <div
-        className="order-id"
-        data-tesdid="seller_orders__element-order-id-<id>"
-      >
-        <div>
-          <p className="order-pedido">Pedido</p>
-          <p className="order-number">00001</p>
-        </div>
-      </div>
-
-      <div>
-        <div>
-          <div data-testid="seller_orders__element-delivery-status-<id>">
-            PENDENTE
+    <div>
+      { products && (products.map((product, id) => (
+        <div
+          className="order-card"
+          key={ id }
+        >
+          <div data-testid={ `customer_products__element-card-price-<${product.id}>` }>
+            { product.price }
           </div>
-
+          <div className="image-id">
+            <img
+              src={ product.urlImage }
+              alt={ `Imagem da ${product.name}` }
+              data-tesdid={ `customer_products__img-card-bg-image-<${product.id}>` }
+            />
+          </div>
           <div>
-            <div data-testid="seller_orders__element-order-date-<id>">DATA</div>
+            <p
+              className="order-pedido"
+              data-testid="customer_products__element-card-title"
+            >
+              { product.name }
 
-            <div data-testid="seller_orders__element-card-price-<id>">
-              PREÇO
-            </div>
+            </p>
           </div>
+          <ProductQuantity id={ product.id } />
         </div>
-        <span data-testid="seller_orders__element-card-address-<id>">
-          Rua Irmãos Monteiro, Bairo Pedras, 851
-        </span>
-      </div>
+      )))}
     </div>
+
   );
 }
 

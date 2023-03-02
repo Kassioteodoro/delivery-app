@@ -8,8 +8,6 @@ function Orders() {
       <Header />
       <div className="orders">
         <OrderCard />
-        <OrderCard />
-        <OrderCard />
       </div>
     </div>
   );
