@@ -48,8 +48,8 @@ const getSalesBySellerId = async (sellerId) => {
 };
 
 const updateStatus = async (saleId, status) => {
-    const sale = await Sale.update({ status }, { where: { id: saleId } });
-    return sale;
+    await Sale.update({ status }, { where: { id: saleId } });
+    return { message: 'Status has been updated successfully' };
 };
 
 module.exports = {

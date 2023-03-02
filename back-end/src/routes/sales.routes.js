@@ -5,6 +5,6 @@ const route = express.Router();
 
 route.post('/', registerNewSale);
 route.get('/seller', getSales);
-route.put('/status', update)
+route.put('/status', update);
 
 module.exports = route;
