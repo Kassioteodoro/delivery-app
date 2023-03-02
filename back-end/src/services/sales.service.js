@@ -1,6 +1,6 @@
-const { Sale, SaleProduct, sequelize } = require("../database/models");
-const { findUserByName } = require("./users.service");
-const { findProductByName } = require("./products.service");
+const { Sale, SaleProduct, sequelize } = require('../database/models');
+const { findUserByName } = require('./users.service');
+const { findProductByName } = require('./products.service');
 
 const saveSaleToDb = async (userId, sale, t) => {
   const { seller, totalPrice, deliveryAddress, deliveryNumber } = sale;
@@ -13,9 +13,9 @@ const saveSaleToDb = async (userId, sale, t) => {
       deliveryAddress,
       deliveryNumber,
       saleDate: Date(),
-      status: "Pendente",
+      status: 'Pendente',
     },
-    { transaction: t }
+    { transaction: t },
   );
 };
 
@@ -28,14 +28,8 @@ const createNewSale = async (checkout, userId) => {
       items.map(async ({ name, quantity }) => {
         const productId = await findProductByName(name);
         const saleId = sale.id;
-        SaleProduct.create({
-          saleId,
-          productId: productId.id,
-          quantity,
-        });
-      }),
-      { transaction: t }
-    );
+        SaleProduct.create({ saleId, productId: productId.id, quantity });
+      }), { transaction: t });
     t.commit();
     // console.log(sale.dataValues.id);
     return sale.dataValues.id;
@@ -48,7 +42,7 @@ const createNewSale = async (checkout, userId) => {
 const getSalesBySallerId = async (sellerId) => {
   const sales = await Sale.findAll({
     where: { sellerId },
-    include: [{ model: SaleProduct, as: "products" }],
+    include: [{ model: SaleProduct, as: 'products' }],
   });
   return { message: sales };
 };
