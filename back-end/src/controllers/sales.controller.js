@@ -1,5 +1,5 @@
 const { verifyToken } = require('../auth/jwtFunctions');
-const { createNewSale, getSalesBySellerId } = require('../services/sales.service');
+const { createNewSale, getSalesBySellerId, updateStatus } = require('../services/sales.service');
 
 const registerNewSale = async (req, res) => {
   try {
@@ -26,7 +26,26 @@ const getSales = async (req, res) => {
   }
 };
 
+const update = async (req, res) => {
+  try {
+    const user = verifyToken(req.get('Authorization'));
+    if (user.data.role !== 'seller') {
+      return res.status(401)
+      .json({ message: 'Only sellers can update status' });
+    } 
+    const { saleId, status } = req.body;
+    if (status !== 'Entregue') {
+      const sale = await updateStatus(saleId, status);
+      return res.status(200).json(sale);
+    }
+    res.status(401).json({ message: 'Seller cannot change status to "Entregue"' });
+  } catch (error) {
+    return res.status(401).json(error);
+  }
+};
+
 module.exports = {
   registerNewSale,
   getSales,
+  update,
 };
