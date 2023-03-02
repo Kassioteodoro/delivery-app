@@ -1,5 +1,7 @@
 const express = require('express');
-const { registerNewSale, getSales, sellerUpdate, customerUpdate } = require('../controllers/sales.controller');
+const { 
+  registerNewSale, getSales, sellerUpdate, customerUpdate, 
+} = require('../controllers/sales.controller');
 
 const route = express.Router();
 
