@@ -29,7 +29,8 @@ const createNewSale = async (checkout, userId) => {
         const productId = await findProductByName(name);
         const saleId = sale.id;
         SaleProduct.create({ saleId, productId: productId.id, quantity });
-      }), { transaction: t });
+      }), { transaction: t },
+    );
     t.commit();
     // console.log(sale.dataValues.id);
     return sale.dataValues.id;
@@ -39,15 +40,14 @@ const createNewSale = async (checkout, userId) => {
   }
 };
 
-const getSalesBySallerId = async (sellerId) => {
+const getSalesBySellerId = async (sellerId) => {
   const sales = await Sale.findAll({
     where: { sellerId },
-    include: [{ model: SaleProduct, as: 'products' }],
   });
   return { message: sales };
 };
 
 module.exports = {
   createNewSale,
-  getSalesBySallerId,
+  getSalesBySellerId,
 };
