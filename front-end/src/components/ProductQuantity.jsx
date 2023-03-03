@@ -2,15 +2,23 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 export default function ProductQuantity(props) {
-  const { id } = props;
+  const { id, eventValue, setEvent, setIdProduct } = props;
 
   const [quantity, setQuantity] = useState(0);
   const productRemoveQuantity = () => {
-    if (quantity !== 0) setQuantity(quantity - 1);
+    setIdProduct(id);
+    if (quantity !== 0) {
+      setQuantity(quantity - 1);
+      if (eventValue !== 0) {
+        setEvent(eventValue - 1);
+      }
+    }
   };
 
   const productAddQuantity = () => {
+    setIdProduct(id);
     setQuantity(quantity + 1);
+    setEvent(eventValue + 1);
   };
   return (
     <div>
@@ -37,4 +45,7 @@ export default function ProductQuantity(props) {
 
 ProductQuantity.propTypes = {
   id: PropTypes.number.isRequired,
+  eventValue: PropTypes.number.isRequired,
+  setEvent: PropTypes.number.isRequired,
+  setIdProduct: PropTypes.number.isRequired,
 };
