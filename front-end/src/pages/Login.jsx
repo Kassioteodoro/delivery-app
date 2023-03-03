@@ -26,7 +26,7 @@ function Login() {
       email,
       password,
     }).then((response) => {
-      localStorage.setItem('token', JSON.stringify({
+      localStorage.setItem('user', JSON.stringify({
         name: response.data.name,
         email: response.data.email,
         role: response.data.role,

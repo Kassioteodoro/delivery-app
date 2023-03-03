@@ -7,20 +7,20 @@ function Header() {
   const [userName, setUserName] = useState({});
 
   useEffect(() => {
-    setUserName(JSON.parse(localStorage.getItem('token')));
+    setUserName(JSON.parse(localStorage.getItem('user')));
   }, []);
 
   return (
-    <div className="header container">
+    <nav className="header container">
       <div className="header-block-1">
         <button
           className="customer_products__element-navbar-link-products"
           type="button"
           onClick={ () => history.push('/customer/products') }
+          data-testid="customer_products__element-navbar-link-products"
         >
           <link
             className="customer_products__element-navbar-link-products"
-            data-testid="customer_products__element-navbar-link-products"
           />
           PRODUTOS
         </button>
@@ -55,7 +55,7 @@ function Header() {
           SAIR
         </button>
       </div>
-    </div>
+    </nav>
   );
 }
 export default Header;
