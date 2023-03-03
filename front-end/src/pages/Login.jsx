@@ -26,8 +26,12 @@ function Login() {
       email,
       password,
     }).then((response) => {
-      localStorage.setItem('token', response.data.token);
-      localStorage.setItem('name', response.data.name);
+      localStorage.setItem('token', JSON.stringify({
+        name: response.data.name,
+        email: response.data.email,
+        role: response.data.role,
+        token: response.data.token,
+      }));
       history.push('/customer/products');
     }).catch(() => {
       setInvalidUser(true);

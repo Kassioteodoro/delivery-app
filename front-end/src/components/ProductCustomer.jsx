@@ -38,22 +38,36 @@ function OrderCard() {
     }
   };
 
-  const handleAddToCart = (item, id) => {
-    const filterTest = arrQuantity.map((product) => {
-      if (product.id === id) {
-        setArrQuantity([...arrQuantity, { id, quantity: product.quantity += 1 }]);
-        return { id, quantity: product.quantity + 1 };
-      }
-      return product.quantity;
-    });
-    setIdProduct(id);
-    setCartItems([...cartItems, item]);
-    setCartProduct((Number(cartProduct) + Number(item.price)).toFixed(2));
-    setQuantity(quantity + 1);
-    console.log(filterTest);
-  };
+  // const handleAddToCart = async (item, id) => {
+  //   const filterTest = await Promise.all(arrQuantity.map((product) => {
+  //     let arr = [];
+  //     if (product.id === id) {
+  //       setArrQuantity([...arrQuantity, { id, quantity: product.quantity += 1 }]);
+  //       arr = [...arrQuantity, { id, quantity: product.quantity += 1 }];
+  //       return arr;
+  //     }
+  //     return product.quantity;
+  //   }));
+  //   setIdProduct(id);
+  //   setCartItems([...cartItems, item]);
+  //   setCartProduct((Number(cartProduct) + Number(item.price)).toFixed(2));
+  //   setQuantity(quantity + 1);
+  //   console.log(filterTest);
+  // };
 
-  const mostrarQuantity = (id) => id;
+  const handleAddProduct = async (id) => {
+    const ProductExist = arrQuantity.find((item) => item.id === id);
+    if (ProductExist) {
+      setArrQuantity(
+        await Promise.all(arrQuantity.map((item) => (item.id === id
+          ? { ...ProductExist,
+            quantity: ProductExist.quantity === 0
+              ? ProductExist.quantity + 2 : ProductExist.quantity + 1 }
+          : item))),
+      );
+    }
+    console.log(arrQuantity);
+  };
 
   return (
     <div>
@@ -78,7 +92,7 @@ function OrderCard() {
             <img
               src={ product.urlImage }
               alt={ `Imagem da ${product.name}` }
-              data-tesdid={ `customer_products__img-card-bg-image-<${product.id}>` }
+              data-testid={ `customer_products__img-card-bg-image-<${product.id}>` }
               width="50px"
             />
           </div>
@@ -92,13 +106,13 @@ function OrderCard() {
             >
               -
             </button>
-            <p data-testid={ `customer_products__input-card-quantity-${product.id}` }>
+            <p data-testid={ `customer_products__input-card-quantity-<${product.id}>` }>
               { () => mostrarQuantity(product.id) }
             </p>
             <button
               data-testid={ `customer_products__button-card-add-item-<${product.id}>` }
               type="button"
-              onClick={ () => handleAddToCart(product, product.id) }
+              onClick={ () => handleAddProduct(product.id) }
               value={ product.id }
             >
               +

@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 
 function Header() {
   const location = useLocation();
   const history = useHistory();
+  const [userName, setUserName] = useState({});
+
+  useEffect(() => {
+    setUserName(JSON.parse(localStorage.getItem('token')));
+  }, []);
+
   return (
     <div className="header container">
       <div className="header-block-1">
@@ -23,7 +29,7 @@ function Header() {
             className="customer_products__element-navbar-link-orders"
             data-testid="customer_products__element-navbar-link-orders"
             type="button"
-            onClick={ () => navigate('/customer/orders') }
+            onClick={ () => history.push('/customer/orders') }
           >
             MEUS PEDIDOS
           </button>
@@ -35,7 +41,7 @@ function Header() {
           data-testid="customer_products__element-navbar-user-full-name"
           type="button"
         >
-          {localStorage.getItem('name') || 'Usuário'}
+          { userName.name || 'Usuário'}
         </button>
         <button
           className="customer_products__element-navbar-link-logout"
