@@ -26,7 +26,7 @@ const getSales = async (req, res) => {
   }
 };
 
-const update = async (req, res) => {
+const sellerUpdate = async (req, res) => {
   try {
     const user = verifyToken(req.get('Authorization'));
     if (user.data.role !== 'seller') {
@@ -44,8 +44,27 @@ const update = async (req, res) => {
   }
 };
 
+const customerUpdate = async (req, res) => {
+  try {
+    const user = verifyToken(req.get('Authorization'));
+    if (user.data.role !== 'customer') {
+      return res.status(401)
+      .json({ message: 'Only customers can update status to "Entregue"' });
+    }
+    const { saleId, status } = req.body;
+    if (status === 'Entregue') {
+      const sale = await updateStatus(saleId, status);
+      return res.status(200).json(sale);
+    }
+    res.status(401).json({ message: 'Customer cannot change status to anything but "Entregue"' });
+  } catch (error) {
+    return res.status(401).json(error);
+  }
+};
+
 module.exports = {
   registerNewSale,
   getSales,
-  update,
+  sellerUpdate,
+  customerUpdate,
 };
