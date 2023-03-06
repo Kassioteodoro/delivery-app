@@ -5,7 +5,7 @@ import context from './Context';
 function Provider({ children }) {
   const [cartProduct, setCartProduct] = useState(0);
   const [cartItems, setCartItems] = useState([]);
-  const [myProducts, setMyProducts] = useState([]);
+  const [arrQuantity, setArrQuantity] = useState([]);
 
   const contextValue = useMemo(() => {
     const objState = {
@@ -13,8 +13,8 @@ function Provider({ children }) {
       setCartProduct,
       cartItems,
       setCartItems,
-      myProducts,
-      setMyProducts,
+      arrQuantity,
+      setArrQuantity,
     };
     return objState;
   }, [
@@ -22,8 +22,8 @@ function Provider({ children }) {
     setCartProduct,
     cartItems,
     setCartItems,
-    myProducts,
-    setMyProducts,
+    arrQuantity,
+    setArrQuantity,
   ]);
   return (
     <context.Provider value={ contextValue }>

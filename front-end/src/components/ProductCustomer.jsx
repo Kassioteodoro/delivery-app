@@ -11,10 +11,9 @@ function ProductCustomer() {
     setCartProduct,
     cartItems,
     setCartItems,
-    // myProducts,
-    // setMyProducts,
+    arrQuantity,
+    setArrQuantity,
   } = useContext(Context);
-  const [arrQuantity, setArrQuantity] = useState([]);
 
   useEffect(() => {
     const getProducts = async () => {
@@ -75,11 +74,6 @@ function ProductCustomer() {
     //   ? { ...product, quantity: product.quantity + 1 }
     //   : { ...item, quantity: productQuantity.quantity }
     //   ))]);
-    // setMyProducts((prevState) => (
-    //   [...myProducts, ...prevState.map((product) => (product.id === item.id
-    //     ? { ...product, quantity: product.quantity + 1 }
-    //     : { ...item, quantity: productQuantity.quantity }
-    //   ))]));
     // console.log(myProducts);
   };
 
