@@ -11,6 +11,8 @@ function ProductCustomer() {
     setCartProduct,
     cartItems,
     setCartItems,
+    // myProducts,
+    // setMyProducts,
   } = useContext(Context);
   const [arrQuantity, setArrQuantity] = useState([]);
 
@@ -68,6 +70,17 @@ function ProductCustomer() {
     const newQuantity = arrQuantity.map((product) => (product.id === item.id
       ? { ...product, quantity: product.quantity + 1 } : product));
     setArrQuantity(newQuantity);
+    // const productQuantity = newQuantity.find((product) => product.id === item.id);
+    // setMyProducts([...myProducts.map((product) => (product.id === item.id
+    //   ? { ...product, quantity: product.quantity + 1 }
+    //   : { ...item, quantity: productQuantity.quantity }
+    //   ))]);
+    // setMyProducts((prevState) => (
+    //   [...myProducts, ...prevState.map((product) => (product.id === item.id
+    //     ? { ...product, quantity: product.quantity + 1 }
+    //     : { ...item, quantity: productQuantity.quantity }
+    //   ))]));
+    // console.log(myProducts);
   };
 
   const mostrarQuantity = (id) => {
