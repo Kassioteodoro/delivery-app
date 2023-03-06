@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 function ProductCustomer() {
+  const history = useHistory();
   const [products, setProducts] = useState([]);
   const [cartProduct, setCartProduct] = useState(0);
   const [cartItems, setCartItems] = useState([]);
@@ -20,6 +22,16 @@ function ProductCustomer() {
     };
     getProducts();
   }, []);
+
+  const handleChange = (product, { target: { value } }) => {
+    if (value > 0) {
+      const newQuantity = arrQuantity.map((item) => (item.id === product.id
+        ? { ...item, quantity: Number(value) } : item));
+      setArrQuantity(newQuantity);
+      setCartItems(Array(value).fill(product));
+      setCartProduct(cartProduct + Number(product.price) * value);
+    }
+  };
 
   const handleSubToCart = (item) => {
     let hasZeroQty = false;
@@ -58,6 +70,10 @@ function ProductCustomer() {
     return product ? product.quantity : 0;
   };
 
+  const redirectCheckout = () => {
+    history.push('/customer/checkout');
+  };
+
   return (
     <div>
       {products.map((product) => (
@@ -92,9 +108,10 @@ function ProductCustomer() {
               -
             </button>
             <input
-              type="number"
+              type="text"
               value={ mostrarQuantity(product.id) }
               data-testid={ `customer_products__input-card-quantity-${product.id}` }
+              onChange={ (e) => handleChange(product, e) }
             />
             <button
               data-testid={ `customer_products__button-card-add-item-${product.id}` }
@@ -107,9 +124,16 @@ function ProductCustomer() {
         </div>
       ))}
       <div className="cart-button">
-        <button data-testid="customer_products__button-cart" type="button">
+        <button
+          data-testid="customer_products__button-cart"
+          type="button"
+          onClick={ redirectCheckout }
+          disabled={ cartItems.length === 0 }
+        >
           Ver Carrinho:
-          {cartProduct}
+          <p data-testid="customer_products__checkout-bottom-value">
+            {cartProduct.toString().replace('.', ',')}
+          </p>
         </button>
       </div>
     </div>
