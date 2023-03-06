@@ -3,40 +3,22 @@ import PropTypes from 'prop-types';
 import context from './Context';
 
 function Provider({ children }) {
-  const [productsArray, setProductsArray] = useState([]);
-  const [cartProducts, setCartProducts] = useState([]);
-  const [totalValue, setTotalValue] = useState(0);
-  const [checkoutTotal, setCheckoutTotal] = useState(0);
-  const [adressValues, setAdressValues] = useState({
-    seller: 'fulana',
-    address: '',
-    number: '',
-  });
+  const [cartProduct, setCartProduct] = useState(0);
+  const [cartItems, setCartItems] = useState([]);
+
   const contextValue = useMemo(() => {
     const objState = {
-      productsArray,
-      cartProducts,
-      totalValue,
-      checkoutTotal,
-      adressValues,
-      setProductsArray,
-      setCartProducts,
-      setTotalValue,
-      setCheckoutTotal,
-      setAdressValues,
+      cartProduct,
+      setCartProduct,
+      cartItems,
+      setCartItems,
     };
     return objState;
   }, [
-    productsArray,
-    cartProducts,
-    totalValue,
-    checkoutTotal,
-    adressValues,
-    setProductsArray,
-    setCartProducts,
-    setTotalValue,
-    setCheckoutTotal,
-    setAdressValues,
+    cartProduct,
+    setCartProduct,
+    cartItems,
+    setCartItems,
   ]);
   return (
     <context.Provider value={ contextValue }>
