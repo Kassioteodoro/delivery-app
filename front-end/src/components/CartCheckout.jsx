@@ -1,16 +1,15 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Context from '../context/Context';
 import './CartCheckout.css';
 
 function CartCheckout() {
   const {
-    // cartProduct,
     setCartProduct,
     cartItems,
     arrQuantity,
+    checkoutItems,
+    setCheckoutItems,
   } = useContext(Context);
-
-  const [checkoutItems, setCheckoutItems] = useState([]);
 
   useEffect(() => {
     setCheckoutItems([...new Set(cartItems)]);

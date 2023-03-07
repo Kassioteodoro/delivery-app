@@ -4,9 +4,10 @@ import axios from 'axios';
 import Context from '../context/Context';
 
 function FinalizeOrder() {
-  const { arrQuantity, cartProduct } = useContext(Context);
+  const {
+    arrQuantity, cartProduct, setOrder, selectedSeller, setSelectedSeller,
+  } = useContext(Context);
   const [sellers, setSellers] = useState([]);
-  const [selectedSeller, setSelectedSeller] = useState('');
   const [address, setAddress] = useState('');
   const [number, setNumber] = useState(0);
 
@@ -42,7 +43,8 @@ function FinalizeOrder() {
     }, { headers:
       { Authorization: JSON.parse(localStorage.getItem('user')).token } })
       .then((response) => {
-        history.push(`/customer/orders/${response.data}`);
+        setOrder(response.data);
+        history.push(`/customer/orders/${response.data.id}`);
       });
   };
 

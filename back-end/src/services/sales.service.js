@@ -31,7 +31,7 @@ const createNewSale = async (checkout, user) => {
       }), { transaction: t },
     );
     t.commit();
-    return sale.dataValues.id;
+    return sale.dataValues;
   } catch (error) {
     console.error(error);
     t.rollback();
