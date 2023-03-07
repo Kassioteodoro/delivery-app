@@ -96,11 +96,6 @@ function CartCheckout() {
           {total.toFixed(2).toString().replace('.', ',')}
         </p>
       </div>
-      {/* {console.log(cartItems, arrQuantity)} */}
-      {console.log(arrQuantity.map((elem) => ({
-        name: cartItems.find((item) => item.id === elem.id).name,
-        quantity: elem.quantity,
-      })))}
     </div>
   );
 }
