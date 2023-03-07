@@ -4,10 +4,9 @@ import './CartCheckout.css';
 
 function CartCheckout() {
   const {
-    cartProduct,
-    // setCartProduct,
+    // cartProduct,
+    setCartProduct,
     cartItems,
-    // setCartItems,
     arrQuantity,
   } = useContext(Context);
 
@@ -15,9 +14,22 @@ function CartCheckout() {
 
   useEffect(() => {
     setCheckoutItems([...new Set(cartItems)]);
-  }, []);
+  }, [cartItems]);
 
   const findQuantity = (id) => arrQuantity.find((item) => item.id === id).quantity;
+
+  const removeItem = (index) => {
+    const newCheckoutItems = [...checkoutItems];
+    newCheckoutItems.splice(index, 1);
+    setCheckoutItems(newCheckoutItems);
+  };
+
+  const total = checkoutItems
+    .reduce((acc, item) => acc + item.price * findQuantity(item.id), 0);
+
+  useEffect(() => {
+    setCartProduct(total);
+  }, [total, setCartProduct]);
 
   return (
     <div>
@@ -73,7 +85,7 @@ function CartCheckout() {
               <td
                 data-testid={ `customer_checkout__element-order-table-remove-${index}` }
               >
-                <button type="button" onClick={ () => console.log('Oi') }>Remover</button>
+                <button type="button" onClick={ () => removeItem(index) }>Remover</button>
               </td>
             </tr>
           ))}
@@ -81,7 +93,7 @@ function CartCheckout() {
       </table>
       <div>
         <p data-testid="customer_checkout__element-order-total-price">
-          {cartProduct.toString().replace('.', ',')}
+          {total.toString().replace('.', ',')}
         </p>
       </div>
     </div>
