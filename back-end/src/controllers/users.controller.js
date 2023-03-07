@@ -7,6 +7,11 @@ const findAllUsers = async (_req, res) => {
   return res.status(200).json(message);
 };
 
+const getSellers = async (_req, res) => {
+  const { message } = await userService.findSellers();
+  return res.status(200).json(message);
+};
+
 const createUser = async (req, res) => {
   const { name, email, password } = req.body;
   const { type, message } = await userService.createUser(name, email, md5(password));
@@ -34,4 +39,5 @@ module.exports = {
   findAllUsers,
   createUser,
   adminCreateUser,
+  getSellers,
 };

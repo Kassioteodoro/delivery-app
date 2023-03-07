@@ -18,10 +18,19 @@ const findAllUser = async () => {
   return { message: users };
 };
 
+const findSellers = async () => {
+  const users = await User.findAll(
+    { attributes: { exclude: ['password'] }, where: { role: 'seller' } },
+  );
+
+  return { message: users };
+};
+
 const findUserByName = async (name) => User.findOne({ where: { name }, raw: true });
 
 module.exports = {
   findAllUser,
   createUser,
   findUserByName,
+  findSellers,
 };
