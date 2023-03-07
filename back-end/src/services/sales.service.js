@@ -19,11 +19,12 @@ const saveSaleToDb = async (userId, sale, t) => {
   );
 };
 
-const createNewSale = async (checkout, userId) => {
+const createNewSale = async (checkout, user) => {
   const { items } = checkout;
   const t = await sequelize.transaction();
   try {
-    const sale = await saveSaleToDb(userId, checkout, t);
+    const userObj = await findUserByName(user);
+    const sale = await saveSaleToDb(userObj.id, checkout, t);
     await Promise.all(
       items.map(async ({ id, quantity }) => {
         const saleId = sale.id;
