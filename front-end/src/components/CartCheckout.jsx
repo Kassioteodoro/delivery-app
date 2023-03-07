@@ -93,7 +93,7 @@ function CartCheckout() {
       </table>
       <div>
         <p data-testid="customer_checkout__element-order-total-price">
-          {total.toString().replace('.', ',')}
+          {total.toFixed(2).toString().replace('.', ',')}
         </p>
       </div>
     </div>
