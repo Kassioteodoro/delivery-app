@@ -25,14 +25,12 @@ const createNewSale = async (checkout, userId) => {
   try {
     const sale = await saveSaleToDb(userId, checkout, t);
     await Promise.all(
-      items.map(async ({ name, quantity }) => {
-        const productId = await findProductByName(name);
+      items.map(async ({ id, quantity }) => {
         const saleId = sale.id;
-        SaleProduct.create({ saleId, productId: productId.id, quantity });
+        SaleProduct.create({ saleId, productId: id, quantity });
       }), { transaction: t },
     );
     t.commit();
-    // console.log(sale.dataValues.id);
     return sale.dataValues.id;
   } catch (error) {
     console.error(error);
