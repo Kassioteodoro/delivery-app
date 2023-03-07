@@ -1,6 +1,5 @@
 const { Sale, SaleProduct, sequelize } = require('../database/models');
 const { findUserByName } = require('./users.service');
-const { findProductByName } = require('./products.service');
 
 const saveSaleToDb = async (userId, sale, t) => {
   const { seller, totalPrice, deliveryAddress, deliveryNumber } = sale;
