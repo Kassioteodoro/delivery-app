@@ -11,6 +11,11 @@ function Login() {
   const MAGIC_SIX = 6;
 
   useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) history.push('/customer/products');
+  }, []);
+
+  useEffect(() => {
     const validEmail = email.toLowerCase().match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
     const validPassword = password.length >= MAGIC_SIX;
     if (validEmail && validPassword) {

@@ -14,6 +14,21 @@ export default function Orders() {
     });
   }, []);
 
+  const parseSaleDate = (date) => {
+    const saleDate = new Date(date);
+    let day = saleDate.getDate();
+    let month = saleDate.getMonth() + 1;
+    const year = saleDate.getFullYear();
+    const magic = 10;
+    if (day < magic) {
+      day = `0${day}`;
+    }
+    if (month < magic) {
+      month = `0${month}`;
+    }
+    return `${day}/${month}/${year} `;
+  };
+
   return (
     <div>
       <HeaderCustomer />
@@ -22,13 +37,13 @@ export default function Orders() {
         <Link to={ `/customer/orders/${id}` } key={ id }>
           <p data-testid={ `customer_orders__element-order-id-${id}` }>{id}</p>
           <p data-testid={ `customer_orders__element-card-price-${id}` }>
-            {totalPrice}
+            {totalPrice.replace('.', ',')}
           </p>
           <p data-testid={ `customer_orders__element-delivery-status-${id}` }>
             {status}
           </p>
           <p data-testid={ `customer_orders__element-order-date-${id}` }>
-            {saleDate}
+            {parseSaleDate(saleDate)}
           </p>
         </Link>
       ))}

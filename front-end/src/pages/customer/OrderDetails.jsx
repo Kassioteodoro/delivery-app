@@ -80,6 +80,7 @@ function OrderDetails() {
         <p
           data-testid="customer_order_details__element-order-total-price"
         >
+          {/* {console.log('cartProduct', cartProduct)} */}
           {cartProduct.toFixed(2).toString().replace('.', ',')}
         </p>
       </div>

@@ -18,8 +18,9 @@ function TableOrder() {
         },
       });
       const total = response.data
-        .reduce((acc, cur) => Number(acc.price) + Number(cur.price));
-      console.log(total);
+        .map((product) => Number(product.price) * product.quantity)
+        .reduce((acc, cur) => acc + cur, 0);
+      console.log(typeof total);
       setProductItems(response.data);
       setCartProduct(total);
     };

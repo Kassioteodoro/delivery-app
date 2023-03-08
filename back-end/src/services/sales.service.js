@@ -1,4 +1,4 @@
-const { Sale, SaleProduct, Product, sequelize } = require('../database/models');
+const { Sale, SaleProduct, sequelize } = require('../database/models');
 const { findUserByName } = require('./users.service');
 
 const saveSaleToDb = async (userId, sale, t) => {
@@ -68,7 +68,7 @@ const getSalesProductsBySaleId = async (saleId) => {
   FROM products p INNER JOIN sales_products sp
   ON p.id = sp.product_id INNER JOIN sales s
   ON sp.sale_id = s.id
-  WHERE quantity > 0 AND s.id = :saleId`, { replacements: { saleId } })
+  WHERE quantity > 0 AND s.id = :saleId`, { replacements: { saleId } });
   return { message: salesProducts };
 };
 
