@@ -7,7 +7,7 @@ const registerNewSale = async (req, res) => {
     const { items, totalPrice, seller, deliveryAddress, deliveryNumber } = req.body;
     const saleId = await createNewSale(
       { items, totalPrice, seller, deliveryAddress, deliveryNumber },
-      user.data.id,
+      user.data.name,
     );
     if (saleId) return res.status(201).json(saleId);
     return res.sendStatus(500);
