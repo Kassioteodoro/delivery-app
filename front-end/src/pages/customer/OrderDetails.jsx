@@ -1,11 +1,28 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import axios from 'axios';
 import Context from '../../context/Context';
 import HeaderCustomer from '../../components/HeaderCustomer';
 import TableOrder from '../../components/TableOrder';
 
 function OrderDetails() {
-  const { order, selectedSeller, cartProduct } = useContext(Context);
+  const { order, selectedSeller, cartProduct, setOrder } = useContext(Context);
   const prefix = 'customer_order_details__';
+
+  const location = useLocation();
+
+  useEffect(() => {
+    const getOrderDetails = async () => {
+      const id = location.pathname.slice(location.pathname.lastIndexOf('/')).slice(1);
+      const response = await axios.get(`http://localhost:3001/sales/all/${id}`, {
+        headers: {
+          Authorization: (JSON.parse(localStorage.getItem('user'))).token,
+        },
+      });
+      setOrder(response.data);
+    };
+    getOrderDetails();
+  }, []);
 
   const parseSaleDate = () => {
     const saleDate = new Date(order.saleDate);
@@ -24,6 +41,7 @@ function OrderDetails() {
 
   return (
     <div>
+      {console.log(order)}
       <div>
         <HeaderCustomer />
       </div>

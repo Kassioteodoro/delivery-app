@@ -1,6 +1,5 @@
-const { Sale, SaleProduct, sequelize } = require('../database/models');
+const { Sale, SaleProduct, Product, sequelize } = require('../database/models');
 const { findUserByName } = require('./users.service');
-const { findProductByName } = require('./products.service');
 
 const saveSaleToDb = async (userId, sale, t) => {
   const { seller, totalPrice, deliveryAddress, deliveryNumber } = sale;
@@ -31,7 +30,7 @@ const createNewSale = async (checkout, userId) => {
       }), { transaction: t },
     );
     t.commit();
-    return sale.dataValues.id;
+    return sale.dataValues;
   } catch (error) {
     console.error(error);
     t.rollback();
@@ -45,13 +44,39 @@ const getSalesBySellerId = async (sellerId) => {
   return { message: sales };
 };
 
+const getSalesByCustomerId = async (userId) => {
+  const sales = await Sale.findAll({
+    where: { userId },
+  });
+  return { message: sales };
+};
+
+const getSaleBySaleId = async (saleId) => {
+  const sales = await Sale.findOne({
+    where: { id: saleId },
+  });
+  return { message: sales };
+};
+
 const updateStatus = async (saleId, status) => {
-    await Sale.update({ status }, { where: { id: saleId } });
-    return { message: 'Status has been updated successfully' };
+  await Sale.update({ status }, { where: { id: saleId } });
+  return { message: 'Status has been updated successfully' };
+};
+
+const getSalesProductsBySaleId = async (saleId) => {
+  const [salesProducts] = await sequelize.query(`SELECT s.id, p.name, sp.quantity, p.price
+  FROM products p INNER JOIN sales_products sp
+  ON p.id = sp.product_id INNER JOIN sales s
+  ON sp.sale_id = s.id
+  WHERE quantity > 0 AND s.id = :saleId`, { replacements: { saleId } })
+  return { message: salesProducts };
 };
 
 module.exports = {
   createNewSale,
   getSalesBySellerId,
   updateStatus,
+  getSalesByCustomerId,
+  getSaleBySaleId,
+  getSalesProductsBySaleId,
 };

@@ -1,5 +1,7 @@
 const { verifyToken } = require('../auth/jwtFunctions');
-const { createNewSale, getSalesBySellerId, updateStatus } = require('../services/sales.service');
+const { 
+  createNewSale, getSalesByCustomerId, updateStatus, getSaleBySaleId, getSalesProductsBySaleId,
+} = require('../services/sales.service');
 
 const registerNewSale = async (req, res) => {
   try {
@@ -16,10 +18,20 @@ const registerNewSale = async (req, res) => {
   }
 };
 
-const getSales = async (req, res) => {
+const getCustomerSales = async (req, res) => {
   try {
     const user = verifyToken(req.get('Authorization'));
-    const sales = await getSalesBySellerId(user.data.id);
+    const sales = await getSalesByCustomerId(user.data.id);
+    return res.status(200).json(sales.message);
+  } catch (error) {
+    return res.status(401).json(error);
+  }
+};
+
+const getSale = async (req, res) => {
+  try {
+    // verifyToken(req.get('Authorization'));
+    const sales = await getSaleBySaleId(Number(req.params.id));
     return res.status(200).json(sales.message);
   } catch (error) {
     return res.status(401).json(error);
@@ -62,9 +74,20 @@ const customerUpdate = async (req, res) => {
   }
 };
 
+const getOrderDetails = async (req, res) => {
+  try {
+    const details = await getSalesProductsBySaleId(Number(req.params.id));
+    return res.status(200).json(details.message);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};
+
 module.exports = {
   registerNewSale,
-  getSales,
+  getCustomerSales,
   sellerUpdate,
   customerUpdate,
+  getSale,
+  getOrderDetails,
 };

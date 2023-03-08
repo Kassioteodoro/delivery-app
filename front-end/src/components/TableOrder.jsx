@@ -1,10 +1,30 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import axios from 'axios';
 import Context from '../context/Context';
 
 function TableOrder() {
-  const { checkoutItems, arrQuantity } = useContext(Context);
+  const { setCartProduct } = useContext(Context);
+  const [productItems, setProductItems] = useState([]);
 
-  const findQuantity = (id) => arrQuantity.find((item) => item.id === id).quantity;
+  const location = useLocation();
+
+  useEffect(() => {
+    const getOrderDetails = async () => {
+      const id = location.pathname.slice(location.pathname.lastIndexOf('/')).slice(1);
+      const response = await axios.get(`http://localhost:3001/sales/orders/${id}`, {
+        headers: {
+          Authorization: (JSON.parse(localStorage.getItem('user'))).token,
+        },
+      });
+      const total = response.data
+        .reduce((acc, cur) => Number(acc.price) + Number(cur.price));
+      console.log(total);
+      setProductItems(response.data);
+      setCartProduct(total);
+    };
+    getOrderDetails();
+  }, []);
 
   return (
     <table>
@@ -18,8 +38,8 @@ function TableOrder() {
         </tr>
       </thead>
       <tbody>
-        {checkoutItems.map((product, index) => (
-          <tr key={ product.id }>
+        {productItems.map((product, index) => (
+          <tr key={ index }>
             <td
               data-testid={
                 `customer_order_details__element-order-table-item-number-${index}`
@@ -37,7 +57,7 @@ function TableOrder() {
                 `customer_order_details__element-order-table-quantity-${index}`
               }
             >
-              {findQuantity(product.id)}
+              {product.quantity}
             </td>
             <td
               data-testid={
@@ -51,7 +71,7 @@ function TableOrder() {
                 `customer_order_details__element-order-table-sub-total-${index}`
               }
             >
-              {(findQuantity(product.id) * product.price)
+              {(product.quantity * product.price)
                 .toFixed(2).toString().replace('.', ',')}
             </td>
           </tr>
