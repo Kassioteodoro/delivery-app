@@ -1,5 +1,6 @@
 const { Sale, SaleProduct, sequelize } = require('../database/models');
 const { findUserByName } = require('./users.service');
+const { findProductByName } = require('./products.service');
 
 const saveSaleToDb = async (userId, sale, t) => {
   const { seller, totalPrice, deliveryAddress, deliveryNumber } = sale;
@@ -18,12 +19,11 @@ const saveSaleToDb = async (userId, sale, t) => {
   );
 };
 
-const createNewSale = async (checkout, user) => {
+const createNewSale = async (checkout, userId) => {
   const { items } = checkout;
   const t = await sequelize.transaction();
   try {
-    const userObj = await findUserByName(user);
-    const sale = await saveSaleToDb(userObj.id, checkout, t);
+    const sale = await saveSaleToDb(userId, checkout, t);
     await Promise.all(
       items.map(async ({ id, quantity }) => {
         const saleId = sale.id;
@@ -31,7 +31,7 @@ const createNewSale = async (checkout, user) => {
       }), { transaction: t },
     );
     t.commit();
-    return sale.dataValues;
+    return sale.dataValues.id;
   } catch (error) {
     console.error(error);
     t.rollback();

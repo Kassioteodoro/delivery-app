@@ -1,19 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import HeaderCustomer from '../../components/HeaderCustomer';
 
 export default function Orders() {
   const [sales, setSales] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:3001/customer/orders').then((res) => {
+    console.log(JSON.parse(localStorage.getItem('user')).token);
+    axios.get('http://localhost:3001/sales/seller', {
+      headers: { Authorization: JSON.parse(localStorage.getItem('user')).token },
+    }).then((res) => {
       setSales(res.data);
     });
   }, []);
 
   return (
-    <>
+    <div>
+      <HeaderCustomer />
       <h1>Orders</h1>
+      {console.log(sales)}
       {sales.map(({ id, totalPrice, status, saleDate }) => (
         <Link to={ `/customer/orders/${id}` } key={ id }>
           <p data-testid={ `customer_orders__element-order-id-${id}` }>{id}</p>
@@ -28,6 +34,6 @@ export default function Orders() {
           </p>
         </Link>
       ))}
-    </>
+    </div>
   );
 }

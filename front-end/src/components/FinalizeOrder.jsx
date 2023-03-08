@@ -36,7 +36,7 @@ function FinalizeOrder() {
     event.preventDefault();
     axios.post('http://localhost:3001/sales', {
       items: arrQuantity,
-      totalPrice: cartProduct,
+      totalPrice: cartProduct.toFixed(2),
       seller: selectedSeller,
       deliveryAddress: address,
       deliveryNumber: number,
