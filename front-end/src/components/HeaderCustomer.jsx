@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 
-function Header() {
+function HeaderCustomer() {
   const location = useLocation();
   const history = useHistory();
   const [userName, setUserName] = useState({});
@@ -58,4 +58,4 @@ function Header() {
     </nav>
   );
 }
-export default Header;
+export default HeaderCustomer;

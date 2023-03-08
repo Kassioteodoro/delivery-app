@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
-import Context from '../context/Context';
-import Header from '../components/Header';
-import TableOrder from '../components/TableOrder';
+import Context from '../../context/Context';
+import HeaderCustomer from '../../components/HeaderCustomer';
+import TableOrder from '../../components/TableOrder';
 
 function OrderDetails() {
   const { order, selectedSeller, cartProduct } = useContext(Context);
@@ -25,7 +25,7 @@ function OrderDetails() {
   return (
     <div>
       <div>
-        <Header />
+        <HeaderCustomer />
       </div>
       <h3>Detalhes do Pedido</h3>
       <div>

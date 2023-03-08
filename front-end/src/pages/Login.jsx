@@ -32,7 +32,8 @@ function Login() {
         role: response.data.role,
         token: response.data.token,
       }));
-      history.push('/customer/products');
+      if (response.data.role === 'seller') history.push('/seller/orders');
+      else history.push('/customer/products');
     }).catch(() => {
       setInvalidUser(true);
     });
