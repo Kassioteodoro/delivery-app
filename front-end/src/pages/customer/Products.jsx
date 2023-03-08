@@ -1,11 +1,11 @@
 import React from 'react';
-import Header from '../components/Header';
-import ProductCustomer from '../components/ProductCustomer';
+import HeaderCustomer from '../../components/HeaderCustomer';
+import ProductCustomer from '../../components/ProductCustomer';
 
 function Orders() {
   return (
     <div>
-      <Header />
+      <HeaderCustomer />
       <div className="orders">
         <ProductCustomer />
       </div>

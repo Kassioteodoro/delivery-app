@@ -2,12 +2,13 @@ import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
 import Login from './pages/Login';
-import Products from './pages/Products';
+import Products from './pages/customer/Products';
 import Register from './pages/Register';
-import Checkout from './pages/Checkout';
+import Checkout from './pages/customer/Checkout';
 import Orders from './pages/Orders';
 import Provider from './context/Provider';
-import OrderDetails from './pages/OrderDetails';
+import OrderDetails from './pages/customer/OrderDetails';
+import SellerOrders from './pages/seller/SellerOrders';
 
 function App() {
   document.title = 'App delivery';
@@ -23,6 +24,7 @@ function App() {
         <Route exact path="/customer/checkout" component={ Checkout } />
         <Route exact path="/customer/orders" component={ <Orders /> } />
         <Route exact path="/customer/orders/:id" component={ OrderDetails } />
+        <Route exact path="/seller/orders" component={ SellerOrders } />
       </Switch>
     </Provider>
   );
