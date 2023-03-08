@@ -1,13 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import Context from '../context/Context';
 
 function ProductCustomer() {
   const history = useHistory();
   const [products, setProducts] = useState([]);
-  const [cartProduct, setCartProduct] = useState(0);
-  const [cartItems, setCartItems] = useState([]);
-  const [arrQuantity, setArrQuantity] = useState([]);
+  const {
+    cartProduct,
+    setCartProduct,
+    cartItems,
+    setCartItems,
+    arrQuantity,
+    setArrQuantity,
+  } = useContext(Context);
 
   useEffect(() => {
     const getProducts = async () => {
@@ -63,6 +69,12 @@ function ProductCustomer() {
     const newQuantity = arrQuantity.map((product) => (product.id === item.id
       ? { ...product, quantity: product.quantity + 1 } : product));
     setArrQuantity(newQuantity);
+    // const productQuantity = newQuantity.find((product) => product.id === item.id);
+    // setMyProducts([...myProducts.map((product) => (product.id === item.id
+    //   ? { ...product, quantity: product.quantity + 1 }
+    //   : { ...item, quantity: productQuantity.quantity }
+    //   ))]);
+    // console.log(myProducts);
   };
 
   const mostrarQuantity = (id) => {
