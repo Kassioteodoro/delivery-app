@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import Products from './pages/Products';
 import Register from './pages/Register';
 import Checkout from './pages/Checkout';
+import Orders from './pages/Orders';
 
 function App() {
   document.title = 'App delivery';
@@ -17,6 +18,7 @@ function App() {
       <Route exact path="/register" component={ Register } />
       <Route exact path="/customer/products" component={ Products } />
       <Route exact path="/customer/checkout" component={ Checkout } />
+      <Route exact path="/customer/orders" component={ <Orders /> } />
     </Switch>
 
   );
