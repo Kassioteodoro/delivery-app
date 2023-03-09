@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import Context from '../context/Context';
+import '../pages/Product.css';
 
 function ProductCustomer() {
   const history = useHistory();
@@ -69,12 +70,6 @@ function ProductCustomer() {
     const newQuantity = arrQuantity.map((product) => (product.id === item.id
       ? { ...product, quantity: product.quantity + 1 } : product));
     setArrQuantity(newQuantity);
-    // const productQuantity = newQuantity.find((product) => product.id === item.id);
-    // setMyProducts([...myProducts.map((product) => (product.id === item.id
-    //   ? { ...product, quantity: product.quantity + 1 }
-    //   : { ...item, quantity: productQuantity.quantity }
-    //   ))]);
-    // console.log(myProducts);
   };
 
   const mostrarQuantity = (id) => {
@@ -87,7 +82,9 @@ function ProductCustomer() {
   };
 
   return (
-    <div>
+    <div
+      className="divProduct"
+    >
       {products.map((product) => (
         <div className="order-card" key={ product.id }>
           <div data-testid={ `customer_products__element-card-title-${product.id}` }>
@@ -100,7 +97,7 @@ function ProductCustomer() {
           <div
             data-testid={ `customer_products__element-card-price-${product.id}` }
           >
-            {`${product.price}`.replace('.', ',')}
+            {`R$${product.price}`.replace('.', ',')}
           </div>
           <div className="image-id">
             <img
@@ -120,6 +117,7 @@ function ProductCustomer() {
               -
             </button>
             <input
+              className="product-quantity"
               type="text"
               value={ mostrarQuantity(product.id) }
               data-testid={ `customer_products__input-card-quantity-${product.id}` }
@@ -144,7 +142,7 @@ function ProductCustomer() {
         >
           Ver Carrinho:
           <p data-testid="customer_products__checkout-bottom-value">
-            {cartProduct.toString().replace('.', ',')}
+            {`R$${cartProduct.toString().replace('.', ',')}`}
           </p>
         </button>
       </div>

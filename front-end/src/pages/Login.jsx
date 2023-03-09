@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import './Login.css';
 
 function Login() {
   const history = useHistory();
@@ -51,7 +52,6 @@ function Login() {
   return (
     <div className="login-container">
       <div className="logo-container">
-        <img className="login-logo" src="" alt="" />
         <h1 className="login-name">App</h1>
       </div>
       <div className="form">
@@ -85,9 +85,8 @@ function Login() {
             disabled={ loginButton }
             onClick={ (e) => postUser(e) }
           >
-            LOGIN
+            Login
           </button>
-          <br />
           <button
             className="register-button"
             type="button"

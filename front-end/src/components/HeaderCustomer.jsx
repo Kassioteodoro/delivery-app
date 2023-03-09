@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
+import '../pages/Header.css';
 
 function HeaderCustomer() {
   const location = useLocation();
@@ -14,37 +15,37 @@ function HeaderCustomer() {
     <nav className="header container">
       <div className="header-block-1">
         <button
-          className="customer_products__element-navbar-link-products"
+          className="buttonProducts"
           type="button"
           onClick={ () => history.push('/customer/products') }
           data-testid="customer_products__element-navbar-link-products"
         >
           <link
-            className="customer_products__element-navbar-link-products"
+            className="buttonProducts"
           />
-          PRODUTOS
+          Produtos
         </button>
         {location.pathname.includes('customer') && (
           <button
-            className="customer_products__element-navbar-link-orders"
+            className="buttonOrders"
             data-testid="customer_products__element-navbar-link-orders"
             type="button"
             onClick={ () => history.push('/customer/orders') }
           >
-            MEUS PEDIDOS
+            Meus Pedidos
           </button>
         )}
       </div>
       <div className="header-block-2">
         <button
-          className="customer_products__element-navbar-user-full-name"
+          className="buttonName"
           data-testid="customer_products__element-navbar-user-full-name"
           type="button"
         >
           { userName.name || 'Usuário'}
         </button>
         <button
-          className="customer_products__element-navbar-link-logout"
+          className="buttonExit"
           data-testid="customer_products__element-navbar-link-logout"
           type="button"
           onClick={ () => {
@@ -52,7 +53,7 @@ function HeaderCustomer() {
             history.push('/login');
           } }
         >
-          SAIR
+          Sair
         </button>
       </div>
     </nav>

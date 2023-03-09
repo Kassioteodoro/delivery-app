@@ -1,0 +1,51 @@
+.header {
+  align-items: center;
+  background-color: #333;
+  color: white;
+  display: flex;
+  font-family: Lato , sans-serif;
+  height: 50px;
+  justify-content: space-between;
+}
+
+.header-block-1 {
+  align-items: center;
+  display: flex;
+}
+
+.header-block-1 button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.header-block-2 button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+.buttonProducts {
+  font-weight: 600;
+  margin-left: 15px;
+}
+
+.buttonOrders {
+  font-weight: 600;
+}
+
+.buttonName {
+  font-weight: 600;
+  margin-right: 10px;
+}
+
+.buttonExit {
+  font-weight: 600;
+  margin-right: 15px;
+}
