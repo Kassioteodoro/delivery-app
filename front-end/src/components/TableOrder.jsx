@@ -22,7 +22,6 @@ function TableOrder() {
       const total = response.data
         .map((product) => Number(product.price) * product.quantity)
         .reduce((acc, cur) => acc + cur, 0);
-      console.log(typeof total);
       setProductItems(response.data);
       setCartProduct(total);
     };

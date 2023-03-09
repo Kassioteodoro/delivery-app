@@ -6,23 +6,41 @@ import HeaderCustomer from '../../components/HeaderCustomer';
 import TableOrder from '../../components/TableOrder';
 
 function OrderDetails() {
-  const { order, selectedSeller, cartProduct, setOrder } = useContext(Context);
+  const {
+    order, selectedSeller, cartProduct, setOrder, statusChanged, setStatusChanged,
+  } = useContext(Context);
   const prefix = 'customer_order_details__';
 
   const location = useLocation();
 
   useEffect(() => {
     const getOrderDetails = async () => {
-      const id = location.pathname.slice(location.pathname.lastIndexOf('/')).slice(1);
-      const response = await axios.get(`http://localhost:3001/sales/all/${id}`, {
-        headers: {
-          Authorization: (JSON.parse(localStorage.getItem('user'))).token,
-        },
-      });
-      setOrder(response.data);
+      if (statusChanged) {
+        const id = location.pathname.slice(location.pathname.lastIndexOf('/')).slice(1);
+        const response = await axios.get(`http://localhost:3001/sales/all/${id}`, {
+          headers: {
+            Authorization: (JSON.parse(localStorage.getItem('user'))).token,
+          },
+        });
+        setOrder(response.data);
+      }
     };
     getOrderDetails();
-  }, []);
+    setStatusChanged(false);
+  }, [statusChanged]);
+
+  const handleClick = async (event) => {
+    event.preventDefault();
+    await axios.put('http://localhost:3001/sales/status/customer', {
+      status: 'Entregue',
+      saleId: order.id,
+    }, {
+      headers: {
+        Authorization: (JSON.parse(localStorage.getItem('user'))).token,
+      },
+    });
+    setStatusChanged(true);
+  };
 
   const parseSaleDate = () => {
     const saleDate = new Date(order.saleDate);
@@ -41,7 +59,7 @@ function OrderDetails() {
 
   return (
     <div>
-      {console.log(order)}
+      {console.log('order', order)}
       <div>
         <HeaderCustomer />
       </div>
@@ -71,7 +89,8 @@ function OrderDetails() {
           <button
             type="button"
             data-testid={ `${prefix}button-delivery-check` }
-            disabled={ order.status !== 'Entregue' }
+            disabled={ order.status !== 'Em Trânsito' }
+            onClick={ handleClick }
           >
             Marcar como Entregue
           </button>

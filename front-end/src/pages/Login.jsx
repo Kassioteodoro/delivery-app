@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
-// Teste
 function Login() {
   const history = useHistory();
   const [email, setChangeEmail] = useState('');
