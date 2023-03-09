@@ -7,7 +7,7 @@ export default function Orders() {
   const [sales, setSales] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:3001/sales/seller', {
+    axios.get('http://localhost:3001/sales/customer', {
       headers: { Authorization: JSON.parse(localStorage.getItem('user')).token },
     }).then((res) => {
       setSales(res.data);

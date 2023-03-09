@@ -8,6 +8,8 @@ function TableOrder() {
   const [productItems, setProductItems] = useState([]);
 
   const location = useLocation();
+  const prefix = location.pathname.includes('customer')
+    ? 'customer_order_details__' : 'seller_order_details__';
 
   useEffect(() => {
     const getOrderDetails = async () => {
@@ -43,33 +45,33 @@ function TableOrder() {
           <tr key={ index }>
             <td
               data-testid={
-                `customer_order_details__element-order-table-item-number-${index}`
+                `${prefix}element-order-table-item-number-${index}`
               }
             >
               {index + 1}
             </td>
             <td
-              data-testid={ `customer_order_details__element-order-table-name-${index}` }
+              data-testid={ `${prefix}element-order-table-name-${index}` }
             >
               {product.name}
             </td>
             <td
               data-testid={
-                `customer_order_details__element-order-table-quantity-${index}`
+                `${prefix}element-order-table-quantity-${index}`
               }
             >
               {product.quantity}
             </td>
             <td
               data-testid={
-                `customer_order_details__element-order-table-unit-price-${index}`
+                `${prefix}element-order-table-unit-price-${index}`
               }
             >
               {Number(product.price).toFixed(2).toString().replace('.', ',')}
             </td>
             <td
               data-testid={
-                `customer_order_details__element-order-table-sub-total-${index}`
+                `${prefix}element-order-table-sub-total-${index}`
               }
             >
               {(product.quantity * product.price)

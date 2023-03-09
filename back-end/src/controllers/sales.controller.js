@@ -1,6 +1,7 @@
 const { verifyToken } = require('../auth/jwtFunctions');
 const { 
   createNewSale, getSalesByCustomerId, updateStatus, getSaleBySaleId, getSalesProductsBySaleId,
+  getSalesBySellerId,
 } = require('../services/sales.service');
 
 const registerNewSale = async (req, res) => {
@@ -32,6 +33,16 @@ const getSale = async (req, res) => {
   try {
     // verifyToken(req.get('Authorization'));
     const sales = await getSaleBySaleId(Number(req.params.id));
+    return res.status(200).json(sales.message);
+  } catch (error) {
+    return res.status(401).json(error);
+  }
+};
+
+const getSales = async (req, res) => {
+  try {
+    const user = verifyToken(req.get('Authorization'));
+    const sales = await getSalesBySellerId(user.data.id);
     return res.status(200).json(sales.message);
   } catch (error) {
     return res.status(401).json(error);
@@ -89,5 +100,6 @@ module.exports = {
   sellerUpdate,
   customerUpdate,
   getSale,
+  getSales,
   getOrderDetails,
 };

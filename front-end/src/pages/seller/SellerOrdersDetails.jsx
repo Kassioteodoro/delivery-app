@@ -1,13 +1,13 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import Context from '../../context/Context';
-import HeaderCustomer from '../../components/HeaderCustomer';
+import HeaderSeller from '../../components/HeaderSeller';
 import TableOrder from '../../components/TableOrder';
 
-function OrderDetails() {
-  const { order, selectedSeller, cartProduct, setOrder } = useContext(Context);
-  const prefix = 'customer_order_details__';
+function SellerOrdersDetails() {
+  const { order, cartProduct, setOrder } = useContext(Context);
+  const prefix = 'seller_order_details__';
 
   const location = useLocation();
 
@@ -43,7 +43,7 @@ function OrderDetails() {
     <div>
       {console.log(order)}
       <div>
-        <HeaderCustomer />
+        <HeaderSeller />
       </div>
       <h3>Detalhes do Pedido</h3>
       <div>
@@ -52,11 +52,6 @@ function OrderDetails() {
             data-testid={ `${prefix}element-order-details-label-order-id` }
           >
             { `PEDIDO ${order.id}; ` }
-          </span>
-          <span
-            data-testid={ `${prefix}element-order-details-label-seller-name` }
-          >
-            { `P. Vend: ${selectedSeller} ` }
           </span>
           <span
             data-testid={ `${prefix}element-order-details-label-order-date` }
@@ -70,15 +65,22 @@ function OrderDetails() {
           </span>
           <button
             type="button"
-            data-testid={ `${prefix}button-delivery-check` }
-            disabled={ order.status !== 'Entregue' }
+            data-testid={ `${prefix}button-preparing-check` }
+            // disabled={ order.status !== 'Entregue' }
           >
-            Marcar como Entregue
+            Preparar Pedido
+          </button>
+          <button
+            type="button"
+            data-testid={ `${prefix}button-dispatch-check` }
+            disabled={ order.status !== 'Preparando' }
+          >
+            Saiu Para Entrega
           </button>
           <TableOrder />
         </section>
         <p
-          data-testid="customer_order_details__element-order-total-price"
+          data-testid={ `${prefix}element-order-total-price` }
         >
           {cartProduct.toFixed(2).toString().replace('.', ',')}
         </p>
@@ -87,4 +89,4 @@ function OrderDetails() {
   );
 }
 
-export default OrderDetails;
+export default SellerOrdersDetails;
