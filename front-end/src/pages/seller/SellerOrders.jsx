@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import HeaderSeller from '../../components/HeaderSeller';
+import '../css/SellerOrders.css';
 
 function SellerOrders() {
   const [sales, setSales] = useState([]);
@@ -30,22 +31,38 @@ function SellerOrders() {
   };
 
   return (
-    <div>
+    <div className="container">
       <HeaderSeller />
-      {sales.map(({ id, totalPrice, status, saleDate }) => (
-        <Link to={ `/seller/orders/${id}` } key={ id }>
-          <p data-testid={ `seller_orders__element-order-id-${id}` }>{id}</p>
-          <p data-testid={ `seller_orders__element-card-price-${id}` }>
-            {totalPrice.replace('.', ',')}
-          </p>
-          <p data-testid={ `seller_orders__element-delivery-status-${id}` }>
-            {status}
-          </p>
-          <p data-testid={ `seller_orders__element-order-date-${id}` }>
-            {parseSaleDate(saleDate)}
-          </p>
-        </Link>
-      ))}
+      <div>
+        <h1>Meus Pedidos</h1>
+      </div>
+      <div className="sales-list">
+        {sales.map(({ id, totalPrice, status, saleDate }) => (
+          <Link to={ `/seller/orders/${id}` } key={ id } className="sale-link">
+            <div className="sale-info">
+              <p data-testid={ `seller_orders__element-order-id-${id}` }>{id}</p>
+              <p
+                className="sale-price"
+                data-testid={ `seller_orders__element-card-price-${id}` }
+              >
+                {totalPrice.replace('.', ',')}
+              </p>
+              <p
+                className="sale-status"
+                data-testid={ `seller_orders__element-delivery-status-${id}` }
+              >
+                {status}
+              </p>
+              <p
+                className="sale-date"
+                data-testid={ `seller_orders__element-order-date-${id}` }
+              >
+                {parseSaleDate(saleDate)}
+              </p>
+            </div>
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }

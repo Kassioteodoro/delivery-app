@@ -1,0 +1,53 @@
+h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.sales-list {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.sale-link {
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  color: #333;
+  margin: 1rem;
+  text-decoration: none;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.sale-link:hover {
+  background-color: #8f6b29;
+}
+
+.sale-info {
+  color: #666;
+  display: inline-block;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-right: 1rem;
+}
+
+.sale-price {
+  color: #333;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.sale-status {
+  color: #333;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.sale-date {
+  color: #666;
+  font-size: 1.2rem;
+  font-weight: 600;
+}

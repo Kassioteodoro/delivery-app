@@ -4,6 +4,7 @@ import axios from 'axios';
 import Context from '../../context/Context';
 import HeaderSeller from '../../components/HeaderSeller';
 import TableOrder from '../../components/TableOrder';
+import '../css/SellerOrdersDetails.css';
 
 function SellerOrdersDetails() {
   const {
@@ -72,7 +73,6 @@ function SellerOrdersDetails() {
 
   return (
     <div>
-      {console.log(order)}
       <div>
         <HeaderSeller />
       </div>
@@ -115,7 +115,7 @@ function SellerOrdersDetails() {
         <p
           data-testid={ `${prefix}element-order-total-price` }
         >
-          {cartProduct.toFixed(2).toString().replace('.', ',')}
+          {`Valor Total: R$${cartProduct.toFixed(2).toString().replace('.', ',')}`}
         </p>
       </div>
     </div>
