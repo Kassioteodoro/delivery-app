@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import HeaderCustomer from '../../components/HeaderCustomer';
+import '../css/Orders.css';
 
 export default function Orders() {
   const [sales, setSales] = useState([]);
@@ -32,20 +33,40 @@ export default function Orders() {
   return (
     <div>
       <HeaderCustomer />
-      <h1>Orders</h1>
+      <h1>Meus Pedidos</h1>
       {sales.map(({ id, totalPrice, status, saleDate }) => (
-        <Link to={ `/customer/orders/${id}` } key={ id }>
-          <p data-testid={ `customer_orders__element-order-id-${id}` }>{id}</p>
-          <p data-testid={ `customer_orders__element-card-price-${id}` }>
-            {totalPrice.replace('.', ',')}
-          </p>
-          <p data-testid={ `customer_orders__element-delivery-status-${id}` }>
-            {status}
-          </p>
-          <p data-testid={ `customer_orders__element-order-date-${id}` }>
-            {parseSaleDate(saleDate)}
-          </p>
-        </Link>
+        <div
+          className="container-div"
+          key={ id }
+        >
+          <Link to={ `/customer/orders/${id}` }>
+            <p
+              className="order-info"
+              data-testid={ `customer_orders__element-order-id-${id}` }
+            >
+              {id}
+
+            </p>
+            <p
+              className="order-info"
+              data-testid={ `customer_orders__element-card-price-${id}` }
+            >
+              {`R$${totalPrice.replace('.', ',')}`}
+            </p>
+            <p
+              className="order-info"
+              data-testid={ `customer_orders__element-delivery-status-${id}` }
+            >
+              {status}
+            </p>
+            <p
+              className="order-info"
+              data-testid={ `customer_orders__element-order-date-${id}` }
+            >
+              {parseSaleDate(saleDate)}
+            </p>
+          </Link>
+        </div>
       ))}
     </div>
   );

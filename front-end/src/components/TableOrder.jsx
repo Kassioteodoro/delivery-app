@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import Context from '../context/Context';
+import '../pages/css/TableOrder.css';
 
 function TableOrder() {
   const { setCartProduct } = useContext(Context);
@@ -66,15 +67,15 @@ function TableOrder() {
                 `${prefix}element-order-table-unit-price-${index}`
               }
             >
-              {Number(product.price).toFixed(2).toString().replace('.', ',')}
+              {`R$${Number(product.price).toFixed(2).toString().replace('.', ',')}`}
             </td>
             <td
               data-testid={
                 `${prefix}element-order-table-sub-total-${index}`
               }
             >
-              {(product.quantity * product.price)
-                .toFixed(2).toString().replace('.', ',')}
+              {`R$${(product.quantity * product.price)
+                .toFixed(2).toString().replace('.', ',')}`}
             </td>
           </tr>
         ))}

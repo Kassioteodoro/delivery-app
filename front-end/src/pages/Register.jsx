@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import './css/Register.css';
 
 function Register() {
   const history = useHistory();
@@ -36,10 +37,6 @@ function Register() {
       setInvalidUser(true);
     });
   };
-
-  // const redirectRegister = () => {
-  //   history.push('/register');
-  // };
 
   return (
     <div className="register-container">

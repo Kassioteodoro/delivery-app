@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import Context from '../context/Context';
-import '../pages/Product.css';
+import '../pages/css/Product.css';
 
 function ProductCustomer() {
   const history = useHistory();

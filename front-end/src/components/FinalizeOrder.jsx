@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import Context from '../context/Context';
-import '../pages/FinalizeOrder.css';
+import '../pages/css/FinalizeOrder.css';
 
 function FinalizeOrder() {
   const {

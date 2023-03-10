@@ -34,6 +34,6 @@ button:hover {
   display: flex;
   font-size: 20px;
   font-weight: 600;
-  justify-content: flex-end;
+  justify-content: center;
   margin-top: 20px;
 }

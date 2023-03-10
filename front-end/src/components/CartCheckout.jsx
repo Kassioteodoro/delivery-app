@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import Context from '../context/Context';
-import '../pages/CartCheckout.css';
+import '../pages/css/CartCheckout.css';
 
 function CartCheckout() {
   const {
@@ -70,15 +70,15 @@ function CartCheckout() {
                   `customer_checkout__element-order-table-unit-price-${index}`
                 }
               >
-                {Number(product.price).toFixed(2).toString().replace('.', ',')}
+                {`R$${Number(product.price).toFixed(2).toString().replace('.', ',')}`}
               </td>
               <td
                 data-testid={
                   `customer_checkout__element-order-table-sub-total-${index}`
                 }
               >
-                {(findQuantity(product.id) * product.price)
-                  .toFixed(2).toString().replace('.', ',')}
+                {`R$${(findQuantity(product.id) * product.price)
+                  .toFixed(2).toString().replace('.', ',')}`}
               </td>
               <td
                 data-testid={ `customer_checkout__element-order-table-remove-${index}` }

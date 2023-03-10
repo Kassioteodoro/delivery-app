@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
-import '../pages/Header.css';
+import '../pages/css/Header.css';
 
 function HeaderCustomer() {
   const location = useLocation();

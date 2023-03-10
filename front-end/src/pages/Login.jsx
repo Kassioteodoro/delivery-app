@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import './Login.css';
+import './css/Login.css';
 
 function Login() {
   const history = useHistory();
@@ -52,7 +52,7 @@ function Login() {
   return (
     <div className="login-container">
       <div className="logo-container">
-        <h1 className="login-name">App</h1>
+        <h1 className="login-name">BiritApp</h1>
       </div>
       <div className="form">
         <form>

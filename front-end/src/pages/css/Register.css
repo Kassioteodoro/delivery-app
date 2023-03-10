@@ -1,5 +1,4 @@
-/* Login container */
-.login-container {
+.register-container {
   align-items: center;
   background-color: rgb(245, 245, 244);
   display: flex;
@@ -9,7 +8,6 @@
   justify-content: center;
 }
 
-/* Logo */
 .logo-container {
   align-items: center;
   display: flex;
@@ -17,15 +15,14 @@
   margin-bottom: 30px;
 }
 
-.login-name {
+.register-name {
   color: #333;
   font-size: 36px;
   font-weight: 600;
   margin: 0;
 }
 
-/* Form */
-.form {
+.form-container {
   background-color: rgb(255, 255, 254);
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -33,14 +30,14 @@
   width: 400px;
 }
 
-.form p {
+.form-container p {
   color: #333;
   font-size: 18px;
   font-weight: 600;
   margin: 0 0 10px;
 }
 
-.form input {
+.form-container input {
   border: 2px solid #ccc;
   border-radius: 5px;
   box-sizing: border-box;
@@ -64,12 +61,12 @@ form button {
   width: 100%;
 }
 
-.form button:disabled {
+.form-container button:disabled {
   background-color: #ccc;
   cursor: default;
 }
 
-.register-button {
+.login-button {
   background-color: #333;
   border: none;
   border-radius: 5px;
@@ -80,8 +77,7 @@ form button {
   padding: 10px;
 }
 
-/* Error message */
-.error {
+.invalid-register {
   color: red;
   font-size: 18px;
   font-weight: 600;

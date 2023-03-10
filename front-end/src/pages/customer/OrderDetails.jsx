@@ -4,6 +4,7 @@ import axios from 'axios';
 import Context from '../../context/Context';
 import HeaderCustomer from '../../components/HeaderCustomer';
 import TableOrder from '../../components/TableOrder';
+import '../css/OrdersDetails.css';
 
 function OrderDetails() {
   const {
@@ -58,7 +59,7 @@ function OrderDetails() {
   };
 
   return (
-    <div>
+    <div className="container">
       {console.log('order', order)}
       <div>
         <HeaderCustomer />
@@ -94,12 +95,12 @@ function OrderDetails() {
           >
             Marcar como Entregue
           </button>
-          <TableOrder />
         </section>
+        <TableOrder />
         <p
           data-testid="customer_order_details__element-order-total-price"
         >
-          {cartProduct.toFixed(2).toString().replace('.', ',')}
+          {`Valor Total: R$${cartProduct.toFixed(2).toString().replace('.', ',')}`}
         </p>
       </div>
     </div>
