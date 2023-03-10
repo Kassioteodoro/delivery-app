@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import Context from '../context/Context';
-import './CartCheckout.css';
+import '../pages/CartCheckout.css';
 
 function CartCheckout() {
   const {
@@ -32,7 +32,6 @@ function CartCheckout() {
 
   return (
     <div>
-      <h3>Finalizar Pedido</h3>
       <table>
         <thead>
           <tr>
@@ -90,10 +89,14 @@ function CartCheckout() {
           ))}
         </tbody>
       </table>
-      <div>
-        <p data-testid="customer_checkout__element-order-total-price">
-          {total.toFixed(2).toString().replace('.', ',')}
+      <div className="valor-total">
+        <p>
+          Valor Total:
+          <span data-testid="customer_checkout__element-order-total-price">
+            {` R$ ${total.toFixed(2).toString().replace('.', ',')}`}
+          </span>
         </p>
+
       </div>
     </div>
   );

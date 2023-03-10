@@ -1,0 +1,39 @@
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  border-bottom: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+tr:hover {
+  background-color: white;
+}
+
+button {
+  background-color: #8f6b29;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+}
+
+button:hover {
+  background-color: #8f6b29;
+}
+
+.valor-total {
+  display: flex;
+  font-size: 20px;
+  font-weight: 600;
+  justify-content: flex-end;
+  margin-top: 20px;
+}

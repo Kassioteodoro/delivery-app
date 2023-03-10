@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import Context from '../context/Context';
+import '../pages/FinalizeOrder.css';
 
 function FinalizeOrder() {
   const {
@@ -53,7 +54,7 @@ function FinalizeOrder() {
       <h3> Detalhes e Endereço para Entrega </h3>
       <div>
         <label htmlFor="seller">
-          P. Vendedora Responsável:
+          Pessoa Vendedora Responsável:
           <select
             id="seller"
             name="seller"
@@ -70,8 +71,9 @@ function FinalizeOrder() {
           </select>
         </label>
         <label htmlFor="address">
-          Endereço
+          Endereço:
           <input
+            className="endereco"
             type="text"
             id="address"
             data-testid="customer_checkout__input-address"
@@ -79,8 +81,9 @@ function FinalizeOrder() {
           />
         </label>
         <label htmlFor="number">
-          Número
+          Número:
           <input
+            className="numero-endereco"
             type="number"
             id="address"
             data-testid="customer_checkout__input-address-number"
